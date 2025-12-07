@@ -9,6 +9,7 @@ def read_tsv(filepath: str):
         .option("header", "true") \
         .option("delimiter", "\t") \
         .option("inferSchema", "true") \
+        .option("nullValue", "\\N") \
         .load(filepath)
     for column in df.columns:
         df = df.withColumnRenamed(column, re.sub(r'[,;\{\}\(\)=]', '', re.sub(r'\s+', '_', column).lower()))
